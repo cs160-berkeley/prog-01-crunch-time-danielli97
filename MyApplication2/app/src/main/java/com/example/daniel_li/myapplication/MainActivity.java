@@ -9,6 +9,7 @@ import android.widget.TextView;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 
 
 import java.util.HashMap;
@@ -20,21 +21,30 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     private HashSet<String>  reps = new HashSet();
     private HashSet<String> minutes = new HashSet();
     private Spinner exercise1, exercise2;
-    private TextView input;
+    private EditText inputNumber;
+    private TextView calories, outputTop, outputBottom, conversion;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        input = (TextView) findViewById(R.id.exerciseInput);
+        inputNumber = (EditText) findViewById(R.id.exerciseInput);
+        calories = (TextView) findViewById(R.id.calNumber);
+        outputTop = (TextView) findViewById(R.id.outputType1);
+        outputBottom = (TextView) findViewById(R.id.outputType2);
+        conversion = (TextView) findViewById(R.id.conversion);
         exercise1 = (Spinner) findViewById(R.id.exerciseSpinner1);
         exercise2 = (Spinner) findViewById(R.id.exerciseSpinner2);
-
+        //set hashmaps|hashsets
+        setHashMap();
+        setHashSetReps();
         //update spinner
         exercise1.setOnItemSelectedListener(this);
         exercise2.setOnItemSelectedListener(this);
         //add exercises to spinner
         spinnerGenerate();
+        //actual action
+        showConversion();
 
     }
 
@@ -58,7 +68,8 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         exercise2.setAdapter(adapter2);
     }
 
-        private void setHashMap() {
+    private void setHashMap() {
+
         exerciseMap.put("Pushup", 100.0/350.0);
         exerciseMap.put("Situp", 100.0/200.0);
         exerciseMap.put("Squats", 100.0/225);
@@ -75,6 +86,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     }
 
     private void setHashSetReps() {
+
         reps.add("Pushup");
         reps.add("Situp");
         reps.add("Squats");
@@ -82,21 +94,43 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
     }
 
-    private void setHashSetminutes() {
-        minutes.add("Leg-lift");
-        minutes.add("Plank");
-        minutes.add("Jumping Jacks");
-        minutes.add("Cycling");
-        minutes.add("Walking");
-        minutes.add("Jogging");
-        minutes.add("Swimming");
-        minutes.add("Stair-climbing");
-    }
-
     private double conversion(String exercise, Double amount) {
         double conversionMetric = exerciseMap.get(exercise);
         double retValue = conversionMetric * amount;
         return retValue;
+    }
+
+    private void showConversion() {
+        try {
+            Double userInputNumber = Double.parseDouble(inputNumber.getText().toString());
+            String exerciseInputTop = exercise1.getSelectedItem().toString();
+            String exerciseInputBottom = exercise2.getSelectedItem().toString();
+            String reps = "reps";
+            String minutes = "minutes";
+            //set the correct units
+            if (reps.contains(exerciseInputTop)) {
+                outputTop.setText(reps);
+            } else {
+                outputTop.setText(minutes);
+            }
+            if (reps.contains(exerciseInputBottom)) {
+                outputBottom.setText(reps);
+            } else {
+                outputBottom.setText(minutes);
+            }
+
+            //set correct calories burned
+            Double converted = conversion(exerciseInputTop, userInputNumber);
+            String caloriesBurned = converted.toString();
+            calories.setText(caloriesBurned);
+            //set correct exercise equivalent
+            Double equivalentConverted = converted / exerciseMap.get(exerciseInputBottom);
+            String equivalentExercise = equivalentConverted.toString();
+            conversion.setText(equivalentExercise);
+
+        } catch (Exception e) {
+            return;
+        }
     }
 }
 
