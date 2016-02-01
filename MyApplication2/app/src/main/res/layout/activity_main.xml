@@ -57,7 +57,7 @@
                     >
 
                     <EditText
-                        android:id="@+id/edit_me"
+                        android:id="@+id/input"
                         android:layout_height="wrap_content"
                         android:layout_width="0dp"
                         android:layout_weight="1"
@@ -79,7 +79,7 @@
                 android:layout_width="0dp"
                 android:layout_weight="2"
                 android:layout_height="fill_parent"
-                android:id="@+id/exercise_photo"
+                android:id="@+id/photo_from1"
                 android:scaleType="centerCrop"
                 />
         </LinearLayout>
@@ -181,7 +181,7 @@
                 android:layout_width="0dp"
                 android:layout_weight="2"
                 android:layout_height="fill_parent"
-                android:id="@+id/exercise_photo2"
+                android:id="@+id/photo_from2"
                 android:scaleType="centerCrop"
                 />
         </LinearLayout>

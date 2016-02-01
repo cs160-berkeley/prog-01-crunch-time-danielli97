@@ -2,6 +2,9 @@ package com.example.daniel_li.myapplication;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.Spinner;
+import android.widget.TextView;
+
 import java.util.HashMap;
 import java.util.HashSet;
 
@@ -10,6 +13,8 @@ public class MainActivity extends AppCompatActivity {
     private HashMap<String, Double> exerciseMap = new HashMap();
     private HashSet<String>  reps = new HashSet();
     private HashSet<String> minutes = new HashSet();
+    private Spinner exercise1, exercise2;
+    private TextView input;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,8 +36,8 @@ public class MainActivity extends AppCompatActivity {
         exerciseMap.put("Cycling", 100.0/12);
         exerciseMap.put("Walking", 100.0/20);
         exerciseMap.put("Jogging", 100.0/12);
-        exerciseMap.put("Swimming", 100.0/13);
-        exerciseMap.put("Stair-climbing", 100.0/15);
+        exerciseMap.put("Swimming", 100.0 / 13);
+        exerciseMap.put("Stair-climbing", 100.0 / 15);
 
     }
 
@@ -53,6 +58,12 @@ public class MainActivity extends AppCompatActivity {
         minutes.add("Jogging");
         minutes.add("Swimming");
         minutes.add("Stair-climbing");
+    }
+
+    private double conversion(String exercise, Double amount) {
+        double conversionMetric = exerciseMap.get(exercise);
+        double retValue = conversionMetric * amount;
+        return retValue;
     }
 }
 
