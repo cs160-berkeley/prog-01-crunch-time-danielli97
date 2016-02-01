@@ -53,34 +53,26 @@
                     android:layout_height="wrap_content"
                     android:layout_width="fill_parent"
                     android:layout_alignParentBottom="true"
+                    android:orientation="horizontal"
                     >
 
                     <EditText
-                        android:id="@+id/edit_age_year"
-                        android:layout_height="match_parent"
+                        android:id="@+id/edit_me"
+                        android:layout_height="wrap_content"
                         android:layout_width="0dp"
                         android:layout_weight="1"
-                        android:gravity="bottom"
+                        android:gravity="center"
                         android:inputType="number"
                         />
-                    <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
+                    <TextView
+                        android:id="@+id/outputType1"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical">
-                        <RadioButton android:id="@+id/radio_pirates"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Minutes"
-                            android:onClick="onRadioButtonClicked"/>
-                        <RadioButton android:id="@+id/radio_ninjas"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Reps"
-                            android:onClick="onRadioButtonClicked"/>
-                    </RadioGroup>
-
+                        android:layout_width="0dp"
+                        android:layout_weight="0.5"
+                        android:text="Units"
+                        />
                 </LinearLayout>
+
             </LinearLayout>
 
             <ImageView
