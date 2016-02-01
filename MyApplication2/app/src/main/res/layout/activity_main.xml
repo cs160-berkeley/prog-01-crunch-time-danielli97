@@ -43,7 +43,7 @@
                     android:layout_height="wrap_content"
                     android:layout_width="fill_parent" >
                     <Spinner
-                        android:id="@+id/from_exercises"
+                        android:id="@+id/exerciseSpinner1"
                         android:layout_height="wrap_content"
                         android:layout_width="fill_parent"
                         android:layout_marginBottom="16dp"
@@ -57,7 +57,7 @@
                     >
 
                     <EditText
-                        android:id="@+id/input"
+                        android:id="@+id/exerciseInput"
                         android:layout_height="wrap_content"
                         android:layout_width="0dp"
                         android:layout_weight="1"
@@ -123,7 +123,7 @@
                     android:layout_height="60dp"
                     android:layout_width="fill_parent" >
                     <Spinner
-                        android:id="@+id/from_exercises"
+                        android:id="@+id/exerciseSpinner2"
                         android:layout_height="wrap_content"
                         android:layout_width="fill_parent"
                         android:layout_marginBottom="16dp"
