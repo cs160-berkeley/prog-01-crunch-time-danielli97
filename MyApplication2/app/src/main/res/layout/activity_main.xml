@@ -60,7 +60,7 @@
                         android:id="@+id/exerciseInput"
                         android:layout_height="wrap_content"
                         android:layout_width="0dp"
-                        android:layout_weight="1"
+                        android:layout_weight=".8"
                         android:gravity="center"
                         android:inputType="number"
                         />
@@ -76,10 +76,15 @@
 
             <ImageView
                 android:layout_width="0dp"
-                android:layout_weight="2"
+                android:layout_weight="3"
                 android:layout_height="fill_parent"
                 android:id="@+id/photo_from1"
-                android:scaleType="centerCrop"
+                android:src="@drawable/pushup"
+                android:scaleType="fitXY"
+                android:paddingRight="15dp"
+                android:paddingLeft="15dp"
+                android:paddingTop="15dp"
+                android:paddingBottom="15dp"
                 />
         </LinearLayout>
     </android.support.v7.widget.CardView>
@@ -93,10 +98,14 @@
             android:orientation="horizontal">
             <ImageView
                 android:layout_width="0dp"
-                android:layout_weight="2"
+                android:layout_weight="2.75"
                 android:layout_height="fill_parent"
                 android:id="@+id/photo_from2"
-                android:scaleType="centerCrop"
+                android:src="@drawable/pushup"
+                android:scaleType="fitXY"
+                android:paddingLeft="10dp"
+                android:paddingTop="22.5dp"
+                android:paddingBottom="22.5dp"
                 />
 
             <LinearLayout
@@ -138,7 +147,7 @@
                         android:id="@+id/conversion"
                         android:layout_height="wrap_content"
                         android:layout_width="0dp"
-                        android:layout_weight="1"
+                        android:layout_weight=".85"
                         android:textColor="#111"
                         android:textSize="24sp"
                         android:gravity="center"
@@ -168,20 +177,13 @@
                     <TextView
                         android:layout_height="wrap_content"
                         android:layout_width="0dp"
-                        android:layout_weight="0.5"
+                        android:layout_weight="0.625"
                         android:text="Calories"
                         />
 
                 </LinearLayout>
             </LinearLayout>
 
-            <!--<ImageView-->
-                <!--android:layout_width="0dp"-->
-                <!--android:layout_weight="2"-->
-                <!--android:layout_height="fill_parent"-->
-                <!--android:id="@+id/photo_from2"-->
-                <!--android:scaleType="centerCrop"-->
-                <!--/>-->
         </LinearLayout>
     </android.support.v7.widget.CardView>
 </LinearLayout>

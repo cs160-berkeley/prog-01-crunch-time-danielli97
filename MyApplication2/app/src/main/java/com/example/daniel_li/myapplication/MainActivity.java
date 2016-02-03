@@ -2,11 +2,13 @@
 //and for showing me how to use android studio for 3 hours
 package com.example.daniel_li.myapplication;
 
+import android.media.Image;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.view.View;
@@ -24,6 +26,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     private HashSet<String>  reps = new HashSet();
     private HashSet<String> minutes = new HashSet();
     private Spinner exercise1, exercise2;
+    private ImageView image1, image2;
     private EditText inputNumber;
     private TextView calories, outputTop, outputBottom, conversion;
 
@@ -38,6 +41,9 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         conversion = (TextView) findViewById(R.id.conversion);
         exercise1 = (Spinner) findViewById(R.id.exerciseSpinner1);
         exercise2 = (Spinner) findViewById(R.id.exerciseSpinner2);
+        image1 = (ImageView) findViewById(R.id.photo_from1);
+        image2 = (ImageView) findViewById(R.id.photo_from2);
+
         //set hashmaps|hashsets
         setHashMap();
         setHashSetReps();
@@ -99,8 +105,8 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         exerciseMap.put("Jumping Jacks", 100.0/10);
         exerciseMap.put("Pullup", 100.0/100);
         exerciseMap.put("Cycling", 100.0/12);
-        exerciseMap.put("Walking", 100.0/20);
-        exerciseMap.put("Jogging", 100.0/12);
+        exerciseMap.put("Walking", 100.0 / 20);
+        exerciseMap.put("Jogging", 100.0 / 12);
         exerciseMap.put("Swimming", 100.0 / 13);
         exerciseMap.put("Stair-climbing", 100.0 / 15);
 
@@ -121,6 +127,14 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         return Math.round(retValue* 100) / 100.0;
     }
 
+    private void pictureUpdate() {
+        String exerciseInputTop = exercise1.getSelectedItem().toString().toLowerCase().replaceAll("\\W","").replaceAll("\\s","");
+        String exerciseInputBottom = exercise2.getSelectedItem().toString().toLowerCase().replaceAll("\\W","").replaceAll("\\s","");
+        int res1 = getResources().getIdentifier(exerciseInputTop, "drawable", this.getPackageName());
+        int res2 = getResources().getIdentifier(exerciseInputBottom, "drawable", this.getPackageName());
+        image1.setImageResource(res1);
+        image2.setImageResource(res2);
+    }
     private void showConversion() {
         Double userInputNumber;
         //try {
@@ -152,7 +166,8 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 outputBottom.setText(minutes);
                 //Log.d("UNIT", "min contains exerciseInputBottom");
             }
-
+            //update picture
+            pictureUpdate();
             //set correct calories burned
             Double converted = conversion(exerciseInputTop, userInputNumber);
             String caloriesBurned = converted.toString();
