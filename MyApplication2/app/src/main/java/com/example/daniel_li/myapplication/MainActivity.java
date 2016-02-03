@@ -4,6 +4,9 @@ package com.example.daniel_li.myapplication;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.util.Log;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.view.View;
@@ -41,6 +44,23 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         //update spinner
         exercise1.setOnItemSelectedListener(this);
         exercise2.setOnItemSelectedListener(this);
+        //dynamic memes
+        inputNumber.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                showConversion();
+            }
+        });
         //add exercises to spinner
         spinnerGenerate();
         //actual action
@@ -50,8 +70,9 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
     public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
         String exerciseType = (String) parent.getItemAtPosition(pos);
-
+        showConversion();
     }
+
 
     public void onNothingSelected(AdapterView<?> parent) {}
 
@@ -97,26 +118,39 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     private double conversion(String exercise, Double amount) {
         double conversionMetric = exerciseMap.get(exercise);
         double retValue = conversionMetric * amount;
-        return retValue;
+        return Math.round(retValue* 100) / 100.0;
     }
 
     private void showConversion() {
-        try {
-            Double userInputNumber = Double.parseDouble(inputNumber.getText().toString());
+        Double userInputNumber;
+        //try {
+            //Log.d("UNIT", "showConversion");
+            //userInputNumber = 0.0;
+            if (inputNumber.getText().toString().matches("")) {
+                userInputNumber = 0.0;
+            } else {
+                userInputNumber = Double.parseDouble(inputNumber.getText().toString());
+            }
             String exerciseInputTop = exercise1.getSelectedItem().toString();
+            //Log.d("UNIT", exerciseInputTop);
             String exerciseInputBottom = exercise2.getSelectedItem().toString();
-            String reps = "reps";
-            String minutes = "minutes";
+            //Log.d("UNIT", exerciseInputBottom);
+            String rep = "Reps";
+            String minutes = "Minutes";
             //set the correct units
             if (reps.contains(exerciseInputTop)) {
-                outputTop.setText(reps);
+                //Log.d("UNIT", "reps contains exerciseInputTop");
+                outputTop.setText(rep);
             } else {
+                //Log.d("UNIT", "minutes contains exerciseInputTop");
                 outputTop.setText(minutes);
             }
             if (reps.contains(exerciseInputBottom)) {
-                outputBottom.setText(reps);
+                //Log.d("UNIT", "reps contains exerciseInputBottom");
+                outputBottom.setText(rep);
             } else {
                 outputBottom.setText(minutes);
+                //Log.d("UNIT", "min contains exerciseInputBottom");
             }
 
             //set correct calories burned
@@ -124,13 +158,13 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             String caloriesBurned = converted.toString();
             calories.setText(caloriesBurned);
             //set correct exercise equivalent
-            Double equivalentConverted = converted / exerciseMap.get(exerciseInputBottom);
-            String equivalentExercise = equivalentConverted.toString();
+            int equivalentConverted = (int) (converted / exerciseMap.get(exerciseInputBottom));
+            String equivalentExercise = "" + equivalentConverted;
             conversion.setText(equivalentExercise);
 
-        } catch (Exception e) {
-            return;
-        }
+        //} catch (Exception e) {
+            //return;
+        //}
     }
 }
 
